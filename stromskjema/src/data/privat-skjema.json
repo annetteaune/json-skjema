@@ -1,0 +1,82 @@
+{
+    "formType": "Privat",
+    "steps": [
+        {
+            "id": "boligtype",
+            "type": "dropdown",
+            "label": "Boligtype",
+            "required": true,
+            "options": [
+                "Enebolig",
+                "Leilighet",
+                "Tomannsbolig",
+                "Rekkehus",
+                "Hytte",
+                "Annet"
+            ]
+        },
+        {
+            "id": "adresse",
+            "type": "auto-address",
+            "label": "Adresse",
+            "fields": [
+                {
+                    "id": "gatenavn",
+                    "label": "Gatenavn",
+                    "type": "text",
+                    "required": true
+                },
+                {
+                    "id": "husnummer",
+                    "label": "Husnummer",
+                    "type": "text",
+                    "required": true
+                },
+                {
+                    "id": "postnummer",
+                    "label": "Postnummer",
+                    "type": "text",
+                    "required": true
+                }
+            ]
+        },
+        {
+            "id": "personalia",
+            "type": "group",
+            "label": "Personalia",
+            "fields": [
+                {
+                    "id": "navn",
+                    "label": "Navn",
+                    "type": "text",
+                    "required": true
+                },
+                {
+                    "id": "epost",
+                    "label": "E-post",
+                    "type": "email",
+                    "required": true
+                },
+                {
+                    "id": "telefon",
+                    "label": "Telefon",
+                    "type": "tel",
+                    "required": true
+                }
+            ]
+        },
+        {
+            "id": "utfyllende_info",
+            "type": "textarea",
+            "label": "Utfyllende informasjon",
+            "required": false,
+            "placeholder": "Skriv eventuelle spørsmål eller kommentarer her!"
+        },
+        {
+            "id": "brukervilkar",
+            "type": "checkbox",
+            "label": "Jeg godtar brukervilkårene.",
+            "required": true
+        }
+    ]
+}
