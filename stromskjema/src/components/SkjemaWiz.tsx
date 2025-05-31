@@ -107,6 +107,7 @@ export const SkjemaWiz: React.FC<Props> = ({ schema }) => {
             onConditionalChange={(id, val) => handleChange(id, val)}
           />
         );
+      case "group":
       case "auto-address":
         return (
           <div>
