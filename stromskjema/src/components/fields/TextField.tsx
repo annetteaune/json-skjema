@@ -5,6 +5,7 @@ interface Props {
   label: string;
   value: string;
   required?: boolean;
+  placeholder?: string;
   onChange: (value: string) => void;
 }
 
@@ -13,6 +14,7 @@ export const TextField: React.FC<Props> = ({
   label,
   value,
   required,
+  placeholder,
   onChange,
 }) => {
   return (
@@ -23,6 +25,7 @@ export const TextField: React.FC<Props> = ({
         type="text"
         value={value}
         required={required}
+        placeholder={placeholder}
         onChange={(e) => onChange(e.target.value)}
       />
     </div>

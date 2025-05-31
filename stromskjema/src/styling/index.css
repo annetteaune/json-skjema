@@ -5,6 +5,7 @@
   --text-color: #ffffff;
   --button-color: rgb(16, 116, 204);
   --button-hover-color: rgb(23, 160, 11);
+  --button-active-color: rgb(19, 119, 10);
 }
 
 html,
@@ -25,6 +26,17 @@ main {
     margin-top: 15vh;
     font-size: 3rem;
   }
+}
+
+.form-selector {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.btn.active {
+  background-color: var(--button-active-color);
+  font-weight: bold;
 }
 
 .skjema-wiz {
@@ -59,6 +71,7 @@ label {
 .text-field,
 .dropdown-field,
 .checkbox-field,
+.checkboxes-field,
 .textarea-field {
   display: flex;
   flex-direction: column;
@@ -91,6 +104,15 @@ label {
   margin-top: 1rem;
 }
 
+/* Checkboxes Field */
+.checkboxes-field {
+  .checkboxes-field-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
 /* Textarea Field */
 .textarea-field {
   textarea {
@@ -103,7 +125,7 @@ label {
 /* Buttons */
 .btn {
   padding: 0.5rem 1rem;
-
+  background-color: var(--button-color);
   border-radius: 0.5rem;
   border: none;
   font-size: 1rem;

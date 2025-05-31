@@ -1,19 +1,45 @@
 {
-    "formType": "Privat",
+    "formType": "Borettslag",
     "steps": [
         {
-            "id": "boligtype",
-            "type": "dropdown",
-            "label": "Boligtype",
+            "id": "type_stromavtale",
+            "type": "checkboxes",
+            "label": "Hvilken type strømavtale ønsker dere?",
             "required": true,
             "options": [
-                "Enebolig",
-                "Leilighet",
-                "Tomannsbolig",
-                "Rekkehus",
-                "Hytte",
-                "Annet"
+                "Alle strømavtaler er aktuelle",
+                "Fastpris",
+                "Spotpris",
+                "Kraftforvaltning",
+                "Annen avtale / Vet ikke"
             ]
+        },
+        {
+            "id": "vet_om_arsforbruk",
+            "type": "radio",
+            "label": "Vet du omtrentlig årsforbruk?",
+            "required": true,
+            "options": [
+                "Ja",
+                "Nei"
+            ],
+            "conditionalFields": [
+                {
+                    "id": "arsforbruk",
+                    "type": "text",
+                    "label": "Omtrentlig årsforbruk (kWh)",
+                    "required": false,
+                    "showIf": {
+                        "value": "Ja"
+                    }
+                }
+            ]
+        },
+        {
+            "id": "navn_borettslag",
+            "type": "text",
+            "label": "Navn på borettslag",
+            "required": true
         },
         {
             "id": "adresse",
@@ -41,9 +67,9 @@
             ]
         },
         {
-            "id": "personalia",
+            "id": "kontaktperson",
             "type": "group",
-            "label": "Personalia",
+            "label": "Kontaktperson",
             "fields": [
                 {
                     "id": "navn",
@@ -63,6 +89,17 @@
                     "type": "tel",
                     "required": true
                 }
+            ]
+        },
+        {
+            "id": "kontaktmetode",
+            "type": "dropdown",
+            "label": "Vil du bli kontaktet via",
+            "required": true,
+            "options": [
+                "E-post eller telefon",
+                "Bare e-post",
+                "Bare telefon"
             ]
         },
         {

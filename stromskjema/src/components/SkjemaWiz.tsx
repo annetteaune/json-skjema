@@ -4,6 +4,8 @@ import { TextField } from "./fields/TextField";
 import { DropdownField } from "./fields/DropdownField";
 import { TextareaField } from "./fields/TextAreaField";
 import { CheckboxField } from "./fields/CheckboxField";
+import { CheckboxesField } from "./fields/CheckboxesField";
+import { RadioButtonField } from "./fields/RadioButtonField";
 
 interface Props {
   schema: Schema;
@@ -46,14 +48,29 @@ export const SkjemaWiz: React.FC<Props> = ({ schema }) => {
         );
       case "textarea":
         return (
-          <TextareaField
-            id={step.id}
-            label={step.label}
-            value={formData[step.id] || ""}
-            placeholder={step.placeholder}
-            required={step.required}
-            onChange={(value) => handleChange(step.id, value)}
-          />
+          <div>
+            <TextareaField
+              id={step.id}
+              label={step.label}
+              value={formData[step.id] || ""}
+              placeholder={step.placeholder}
+              required={step.required}
+              onChange={(value) => handleChange(step.id, value)}
+            />
+            {step.fields?.map((field) => (
+              <div key={field.id}>
+                {field.type === "checkbox" ? (
+                  <CheckboxField
+                    id={field.id}
+                    label={field.label}
+                    checked={formData[field.id] || false}
+                    required={field.required}
+                    onChange={(checked) => handleChange(field.id, checked)}
+                  />
+                ) : null}
+              </div>
+            ))}
+          </div>
         );
       case "checkbox":
         return (
@@ -65,8 +82,31 @@ export const SkjemaWiz: React.FC<Props> = ({ schema }) => {
             onChange={(checked) => handleChange(step.id, checked)}
           />
         );
-
-      case "group":
+      case "checkboxes":
+        return (
+          <CheckboxesField
+            id={step.id}
+            label={step.label}
+            options={step.options || []}
+            value={formData[step.id] || []}
+            required={step.required}
+            onChange={(val) => handleChange(step.id, val)}
+          />
+        );
+      case "radio":
+        return (
+          <RadioButtonField
+            id={step.id}
+            label={step.label}
+            options={step.options || []}
+            value={formData[step.id] || ""}
+            required={step.required}
+            onChange={(val) => handleChange(step.id, val)}
+            conditionalFields={step.conditionalFields}
+            conditionalValues={formData}
+            onConditionalChange={(id, val) => handleChange(id, val)}
+          />
+        );
       case "auto-address":
         return (
           <div>
@@ -102,20 +142,38 @@ export const SkjemaWiz: React.FC<Props> = ({ schema }) => {
     }
   };
 
-  const nextStep = () => setStepIndex((i) => i + 1);
-  const prevStep = () => setStepIndex((i) => i - 1);
+  const goToNextStep = () => setStepIndex((i) => i + 1);
+  const goToPrevStep = () => setStepIndex((i) => i - 1);
+  const nextStep = schema.steps[stepIndex + 1];
+  let showNextConditional = false;
+  if (
+    nextStep &&
+    nextStep.conditional &&
+    formData[nextStep.conditional.field] === nextStep.conditional.value
+  ) {
+    showNextConditional = true;
+  }
 
   return (
     <form onSubmit={(e) => e.preventDefault()} className="skjema-wiz">
       {renderField(currentStep)}
+      {showNextConditional && renderField(nextStep)}
       <div className="skjema-wiz-buttons">
         {stepIndex > 0 && (
-          <button type="button" className="btn tilbake-btn" onClick={prevStep}>
+          <button
+            type="button"
+            className="btn tilbake-btn"
+            onClick={goToPrevStep}
+          >
             Tilbake
           </button>
         )}
         {stepIndex < schema.steps.length - 1 ? (
-          <button type="button" className="btn neste-btn" onClick={nextStep}>
+          <button
+            type="button"
+            className="btn neste-btn"
+            onClick={goToNextStep}
+          >
             Neste
           </button>
         ) : (

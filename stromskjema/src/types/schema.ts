@@ -6,7 +6,9 @@ export type FieldType =
   | "textarea"
   | "checkbox"
   | "group"
-  | "auto-address";
+  | "auto-address"
+  | "checkboxes"
+  | "radio";
 
 export interface BaseField {
   id: string;
@@ -34,9 +36,25 @@ export interface CheckboxField extends BaseField {
   type: "checkbox";
 }
 
+export interface CheckboxesField extends BaseField {
+  type: "checkboxes";
+  options: string[];
+}
+
 export interface GroupField extends BaseField {
   type: "group" | "auto-address";
   fields: Field[];
+}
+
+export interface ConditionalField extends BaseField {
+  showIf: { value: string };
+  placeholder?: string;
+}
+
+export interface RadioField extends BaseField {
+  type: "radio";
+  options: string[];
+  conditionalFields?: ConditionalField[];
 }
 
 export type Field =
@@ -44,16 +62,24 @@ export type Field =
   | OptionField
   | TextareaField
   | CheckboxField
-  | GroupField;
+  | CheckboxesField
+  | GroupField
+  | RadioField
+  | ConditionalField;
 
 export interface Step {
   id: string;
-  type: FieldType; // Simplified - removed the union since FieldType now includes group and auto-address
+  type: FieldType;
   label: string;
-  fields?: Field[]; // for group/auto-address
-  options?: string[]; // for dropdown
-  placeholder?: string; // for textarea
+  fields?: Field[];
+  options?: string[];
+  placeholder?: string;
   required?: boolean;
+  conditional?: {
+    field: string;
+    value: string;
+  };
+  conditionalFields?: ConditionalField[];
 }
 
 export interface Schema {
