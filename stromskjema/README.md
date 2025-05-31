@@ -1,54 +1,69 @@
-# React + TypeScript + Vite
+# Skjemahåndtering konfigurert i JSON
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Dette prosjektet er et dynamisk skjemaoppsett basert på strøm.no. Skjemaene er konfigurert via JSON og rendres dynamisk i React.
 
-Currently, two official plugins are available:
+Ved endring, fjerning eller opprettelse av nye skjemafelter, trenger kun JSON-filen å endres - frontend fikser visningen dynamisk.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Struktur
 
-## Expanding the ESLint configuration
+Jeg startet med å lage et svært enkelt flytskjema for å få oversikt over skjemastruktur og felter som trengs for de ulike brukertypene, som en cheat-sheet under JSON-oppbygging.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+**Flytskjema:**
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+![Flytskjema](public/flytskjema.PNG)
+
+---
+
+## Oppbygging
+
+### JSON-skjemaer
+
+Hver brukertype har sitt eget skjema definert i en JSON-fil:
+
+- `privat-skjema.json`
+- `borettslag-skjema.json`
+- `bedrift-skjema.json`
+
+Disse beskriver stegene og feltene som skjemaene består av.
+
+Eksempel fra `borettslag-skjema.json`:
+
+```json
+"id": "utfyllende_info",
+            "type": "textarea",
+            "label": "Utfyllende informasjon",
+            "required": false,
+            "placeholder": "Skriv eventuelle spørsmål eller kommentarer her!",
+            "fields": [
+                {
+                    "id": "brukervilkar",
+                    "type": "checkbox",
+                    "label": "Jeg godtar brukervilkårene.",
+                    "required": true
+                }
+            ]
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Komponentstruktur
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **App**: Benytter state og knapper for å sendre riktig JSON-fil til SkjemaWiz som prop.
+- **SkjemaWiz**: Hovedkomponenten som styrer flyt og rendring av skjemaet. Benytter state for å holde kontroll på stegene, og en switch-funksjon for å rendre korrekt felt-komponent.
+- **Felt-komponenter**: Gjenbrukbare komponenter for hver felttype (`TextField`, `DropdownField`, `CheckboxField`, `CheckboxesField`, `RadioButtonField`, `TextareaField`).
+- **Dynamisk rendering**: Skjemaet bygges opp steg for steg basert på JSON-konfigurasjonen.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## Ikke hensyntatte aspekter:
+
+Dette lille prosjektet er kun laget for å lære mer om hvordan JSON kan benyttes til å konfigurere dynamiske skjemaer. Det er ikke implementert errorhåndtering, inputvalidering eller lagring av data, objektene skrives kun til konsoll ved fullføring av skjemaet. Tilbakemeldinger på brukerfeil eller andre UX-aspekter er heller ikke hensyntatt.
+
+## For å kjøre:
+
+1. Installer dependencies:
+   ```bash
+   npm install
+   ```
+2. Start Vite-server:
+   ```bash
+   npm run dev
+   ```
+
+---
