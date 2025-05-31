@@ -15,7 +15,7 @@ export const DropdownField: React.FC<Props> = ({
   required,
   onChange,
 }) => (
-  <div>
+  <div className="dropdown-field">
     <label htmlFor={id}>{label}</label>
     <select
       id={id}

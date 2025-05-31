@@ -1,68 +1,117 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --primary-color: #1f3650;
+  --secondary-color: rgb(90, 144, 190);
+  --background-color: #20272b;
+  --text-color: #ffffff;
+  --button-color: rgb(16, 116, 204);
+  --button-hover-color: rgb(23, 160, 11);
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
+html,
 body {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: var(--background-color);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+main {
+  width: 70%;
+  margin: 0 auto;
+  h1 {
+    color: var(--text-color);
+    text-align: center;
+    margin-top: 15vh;
+    font-size: 3rem;
+  }
+}
+
+.skjema-wiz {
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  flex-direction: column;
+  width: 30%;
+  margin: 5rem auto;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  color: var(--text-color);
+  background-color: var(--primary-color);
+  padding: 2rem;
+  border-radius: 1rem;
+  font-size: 1.5rem;
+  .skjema-wiz-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    margin-top: 1rem;
+    .btn:only-child {
+      margin: 0 auto;
+    }
+  }
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+label {
+  font-size: 1.2rem;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+/* Alle fields */
+.text-field,
+.dropdown-field,
+.checkbox-field,
+.textarea-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Text Field */
+.text-field {
+}
+
+/* Dropdown Field */
+.dropdown-field {
+  select {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-size: 1rem;
+  }
+}
+
+/* Checkbox Field */
+.checkbox-field {
+}
+
+/* Textarea Field */
+.textarea-field {
+}
+
+/* Buttons */
+.btn {
+  padding: 0.5rem 1rem;
+
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 1rem;
+  color: var(--text-color);
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: var(--button-hover-color);
+  }
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.tilbake-btn {
+  background-color: var(--button-color);
+}
+
+.neste-btn {
+  background-color: var(--button-color);
+}
+
+.submit-btn {
+  background-color: var(--button-color);
 }

@@ -15,7 +15,7 @@ export const CheckboxField: React.FC<Props> = ({
   required,
   onChange,
 }) => (
-  <div>
+  <div className="checkbox-field">
     <label htmlFor={id}>
       <input
         type="checkbox"

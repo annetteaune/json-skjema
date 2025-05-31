@@ -17,7 +17,7 @@ export const TextareaField: React.FC<Props> = ({
   required,
   onChange,
 }) => (
-  <div>
+  <div className="textarea-field">
     <label htmlFor={id}>{label}</label>
     <textarea
       id={id}

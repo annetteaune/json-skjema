@@ -106,20 +106,24 @@ export const SkjemaWiz: React.FC<Props> = ({ schema }) => {
   const prevStep = () => setStepIndex((i) => i - 1);
 
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
+    <form onSubmit={(e) => e.preventDefault()} className="skjema-wiz">
       {renderField(currentStep)}
-      <div>
+      <div className="skjema-wiz-buttons">
         {stepIndex > 0 && (
-          <button type="button" onClick={prevStep}>
+          <button type="button" className="btn tilbake-btn" onClick={prevStep}>
             Tilbake
           </button>
         )}
         {stepIndex < schema.steps.length - 1 ? (
-          <button type="button" onClick={nextStep}>
+          <button type="button" className="btn neste-btn" onClick={nextStep}>
             Neste
           </button>
         ) : (
-          <button type="submit" onClick={() => console.log("Submit", formData)}>
+          <button
+            type="submit"
+            className="btn submit-btn"
+            onClick={() => console.log("Submit", formData)}
+          >
             Send inn
           </button>
         )}

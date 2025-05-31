@@ -16,7 +16,7 @@ export const TextField: React.FC<Props> = ({
   onChange,
 }) => {
   return (
-    <div>
+    <div className="text-field">
       <label htmlFor={id}> {label}</label>
       <input
         id={id}
