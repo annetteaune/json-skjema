@@ -67,6 +67,11 @@ label {
 
 /* Text Field */
 .text-field {
+  margin-top: 1rem;
+  input {
+    padding: 0.5rem;
+    font-size: 1rem;
+  }
 }
 
 /* Dropdown Field */
@@ -83,10 +88,16 @@ label {
 
 /* Checkbox Field */
 .checkbox-field {
+  margin-top: 1rem;
 }
 
 /* Textarea Field */
 .textarea-field {
+  textarea {
+    height: 10rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+  }
 }
 
 /* Buttons */
